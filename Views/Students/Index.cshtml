@@ -1,0 +1,223 @@
+﻿@model List<Students>
+@{
+    var course = ViewBag.Courses as List<SelectListItem>;
+    var groups = ViewBag.Groups as List<SelectListItem>;
+}
+<div class="container">
+    <h1 class="title">Студенты</h1>
+    <form method="post" action="Index">
+        <div class="selectors">
+            <select name="courseId">
+                <option>Курс</option>
+                @foreach (var c in course)
+                {
+                    if (c.Value == ViewBag.CourseId?.ToString())
+                    {
+                        <option value="@c.Value" selected>@c.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@c.Value">@c.Text</option>
+                    }
+                }
+            </select>
+
+            <select name="groupId">
+                <option>Группа</option>
+                @foreach (var g in groups)
+                {
+                    if (g.Value == ViewBag.GroupId?.ToString())
+                    {
+                        <option value="@g.Value" selected>@g.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@g.Value">@g.Text</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div style="text-align:center;margin-top: 10px;">
+            <button type="submit" class="btn_set">Показать</button>
+        </div>
+    </form>
+    <div style="margin-bottom: 15px;">
+        <a href="@Url.Action("Index","Registration")" class="btn_add">Добавить нового студента</a>
+    </div>
+    @if (TempData["Error"] != null)
+    {
+        <div style="color:red;font-size:19px;">@TempData["Error"]</div>
+    }
+
+    <table class="students-table">
+        <thead>
+            <tr>
+                <th>ФИО</th>
+                <th>Номер телефона</th>
+                <th>Дата рождения</th>
+                <th>Адрес</th>
+                <th>Курс</th>
+                <th>Группа</th>
+                <th>Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+            @* @if (Model != null && Model.Count > 0)
+            { *@
+                @foreach (var s in Model)
+                {
+                    <tr>
+                        <td>@s.FullName</td>
+                        <td>@s.PhoneNumber</td>
+                        <td>@s.BirthDay.ToString("dd.MM.yyyy")</td>
+                        <td>@s.Address</td>
+                        <td>@s.CoursesName</td>
+                        <td>@s.GroupName</td>
+                        <td>
+                            <div class="action_de">
+                                <form method="post" action="/Students/Delete/@s.Id" onsubmit="return confirm('Вы уверены что хотите удалить?')">
+                                    <button type="submit" class="btn_del">Удалить</button>
+                                </form>
+                                <form method="get" action="/Students/Edit/@s.Id">
+                                    <button type="submit" class="btn_edit">Редоктировать</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+           @*  } *@
+           @*  else
+            {
+                <tr>
+                    <td colspan="5" class="empty">Нет данных о студентах</td>
+                </tr>
+            } *@
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .container {
+        max-width: 1400px;
+        margin: 30px auto;
+        padding: 20px;
+    }
+
+    .title {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 28px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .students-table {
+        width: 100%;
+        border-collapse: collapse;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .students-table thead {
+            background-color: #2c3e50;
+            color: #fff;
+        }
+
+        .students-table th, .students-table td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .students-table tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .students-table tbody tr:hover {
+            background-color: #e9ecef;
+            transition: 0.3s;
+        }
+
+    .empty {
+        text-align: center;
+        padding: 20px;
+        color: #777;
+        font-style: italic;
+    }
+
+    .action_de {
+        display: flex;
+        justify-content: left;
+        gap: 10px;
+    }
+
+    .btn_del {
+        padding: 10px 12px;
+        background-color: red;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .btn_del:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+    .btn_edit {
+        padding: 10px 12px;
+        background-color: green;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .btn_edit:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+    .btn_add {
+        padding: 10px 12px;
+        background-color: green;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .btn_add:hover {
+            transform: scale(1.1);
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+    .selectors {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+    select {
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 150px;
+    }
+
+    .btn_set {
+        padding: 10px 12px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        width: 150px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn_edit:hover {
+        background-color: #0056b3;
+    }
+</style>

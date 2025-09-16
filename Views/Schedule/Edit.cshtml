@@ -1,0 +1,89 @@
+﻿@model Schedule
+<div class="conteiner">
+    <h1>Редоктирование</h1>
+    @if (TempData["Error"] != null)
+    {
+        <div style="color:red;font-size:19px;">@TempData["Error"]</div>
+    }
+    <form method="post" asp-action="Edit">
+        <input type="hidden" asp-for="Id" value="@Model.Id" />
+        <label>День недели</label>
+        <select asp-for="DayOfWeek" asp-items="ViewBag.Weeks">
+        </select>
+        <label>Предмет</label>
+        <select asp-for="SubjectId" asp-items="ViewBag.Subjects">
+        </select>
+        <label>Преподователь</label>
+        <select asp-for="TeacherId" asp-items="ViewBag.Teachers">
+        </select>
+        <label>Курс/Семестр</label>
+        <select asp-for="CoursesId" asp-items="ViewBag.Courses">
+        </select>
+        <label>Группа</label>
+        <select asp-for="GroupId" asp-items="ViewBag.Groups">
+        </select>
+        <label>Начало занятий</label>
+        <input type="time" asp-for="StartTime">
+        <label>Конец занятий</label>
+        <input type="time" asp-for="EndTime">
+        <div>
+            <button type="submit" class="btn_edit">Сохранить</button>
+        </div>
+    </form>
+</div>
+<style>
+    body {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        margin-top: 40px;
+        margin-bottom: 20px;
+        font-size: 29px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .conteiner {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 15px;
+        border: none;
+        box-shadow: 0 6px 8px rgba(0,0,0,0.1);
+        background-color: #f8f9fa;
+    }
+
+    label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    select, input {
+        width: 100%;
+        border: 1px solid #ccc;
+        padding: 8px 12px;
+        border-radius: 5px;
+        text-align: left;
+        box-sizing: border-box;
+    }
+
+    .btn_edit {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+        margin-top: 15px;
+        background-color: #007bff;
+        color: white;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn_edit:hover {
+            background-color: #0056b3;
+        }
+</style>

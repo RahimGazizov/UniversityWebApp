@@ -1,0 +1,84 @@
+﻿@model Groups
+@{
+    var curatorList = ViewBag.Teachers as List<SelectListItem>;
+    var courses = ViewBag.Courses as List<SelectListItem>;
+}
+<h1>Добавление группы</h1>
+<div class="insert_group">
+    @if (TempData["Error"] != null)
+    {
+        <div style="color:red;font-size:19px;">@TempData["Error"]</div>
+    }
+    <form method="post" asp-action="Insert">
+        <label>Название группы</label>
+        <input type="text" asp-for="Name" />
+        <label>Куратор группы</label>
+        <select asp-for="CuratorId">
+            <option>Выберите куратора</option>
+            @foreach (var c in curatorList)
+            {
+                <option value="@c.Value">@c.Text</option>
+            }
+        </select>
+        <label>Курс</label>
+        <select asp-for="CourseId">
+            <option>Выберите курс</option>
+            @foreach (var c in courses)
+            {
+                <option value="@c.Value">@c.Text</option>
+            }
+        </select>
+        <div style="margin-top: 20px;">
+            <button type="submit" class="btn_add">Добавить</button>
+        </div>
+    </form>
+</div>
+<style>
+    h1 {
+        font-size: 29px;
+        font-weight: bold;
+        margin-top: 60px;
+        text-align: center;
+    }
+
+    .insert_group {
+        max-width: 500px;
+        margin: 10px auto;
+        background-color: #f8f9fa;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        font-family: Arial, sans-serif;
+    }
+
+    label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+        color: #555;
+    }
+
+    select, input {
+        width: 100%;
+        padding: 8px 12px;
+        margin-top: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+    .btn_add{
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        width: 100%;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn_add:hover {
+            background-color: #0056b3;
+        }
+</style>

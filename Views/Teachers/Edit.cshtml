@@ -1,0 +1,79 @@
+﻿@model Teachers
+<div class="conteiner">
+    <h1>Редоктирование студента</h1>
+    <form method="post" asp-action="Edit">
+        <input type="hidden" asp-for="Id" value="@Model.Id" />
+        <label>Полное имя</label>
+        <input type="text" asp-for="FullName" required />
+        <label>Номер телефона</label>
+        <input type="text" asp-for="PhoneNumber" required />
+        <label>Дата рождения</label>
+        <input type="date" asp-for="BirthDay" required />
+        <label>Адрес проживания</label>
+        <input type="text" asp-for="Address" required />
+        <div>
+            <button type="submit" class="btn_edit">Сохранить</button>
+        </div>
+    </form>
+</div>
+<style>
+    .container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        font-family: Arial, sans-serif;
+    }
+
+        .container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .container label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .container input[type="text"],
+        .container input[type="date"],
+        .container input[type="password"],
+        .container select {
+            width: 100%;
+            padding: 8px 12px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+    .btn_edit {
+        width: 100%;
+        padding: 10px;
+        margin-top: 25px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn_edit:hover {
+            background-color: #0056b3;
+        }
+
+    .error-message {
+        color: red;
+        font-size: 16px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+</style>

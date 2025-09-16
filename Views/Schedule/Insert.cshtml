@@ -1,0 +1,143 @@
+﻿@model Schedule
+@{
+    var weeks = ViewBag.Weeks as List<SelectListItem>;
+    var subjects = ViewBag.Subjects as List<SelectListItem>;
+    var teachers = ViewBag.Teachers as List<SelectListItem>;
+    var courses = ViewBag.Courses as List<SelectListItem>;
+    var groups = ViewBag.Groups as List<SelectListItem>;
+}
+<h1>Добавление расписания</h1>
+<div class="container-form">
+    <form method="post" asp-action="Insert">
+        <label>День недели</label>
+        <select asp-for="DayOfWeek">
+            @foreach (var w in weeks)
+            {
+                if (w.Value == ViewBag.Day.ToString())
+                {
+                    <option value="@w.Value" selected>@w.Text</option>
+                }
+                else
+                {
+                    <option value="@w.Value">@w.Text</option>
+                }
+            }
+        </select>
+
+        <label>Предмет</label>
+        <select asp-for="SubjectId">
+            @foreach (var s in subjects)
+            {
+                <option value="@s.Value">@s.Text</option>
+            }
+        </select>
+
+        <label>Преподаватель</label>
+        <select asp-for="TeacherId">
+            @foreach (var t in teachers)
+            {
+                <option value="@t.Value">@t.Text</option>
+            }
+        </select>
+
+        <label>Курс/Семестр</label>
+        <select asp-for="CoursesId">
+            @foreach (var c in courses)
+            {
+                <option value="@c.Value">@c.Text</option>
+            }
+        </select>
+
+        <label>Группа</label>
+        <select asp-for="GroupId">
+            @foreach (var g in groups)
+            {
+                <option value="@g.Value">@g.Text</option>
+            }
+        </select>
+
+        <label>Начало занятий</label>
+        <input type="time" asp-for="StartTime">
+
+        <label>Конец занятий</label>
+        <input type="time" asp-for="EndTime">
+
+        <!-- Блок кнопок -->
+        <div class="btn-block">
+            <button type="submit" class="btn">Добавить</button>
+            <a href="/Schedule/Index" class="btn">Назад</a>
+        </div>
+    </form>
+</div>
+
+<style>
+    body {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        margin-top: 40px;
+        margin-bottom: 20px;
+        font-size: 28px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .container-form {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        background-color: #f8f9fa;
+    }
+
+    label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+        color: #444;
+    }
+
+    select, input {
+        width: 100%;
+        border: 1px solid #ccc;
+        padding: 10px 12px;
+        border-radius: 6px;
+        margin-top: 5px;
+        box-sizing: border-box;
+    }
+
+    .btn-block {
+        margin-top: 25px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .btn {
+        display: inline-block;
+        width: 150px; 
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        background-color: #007bff;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+    .full-width {
+        width: 100%;
+    }
+</style>

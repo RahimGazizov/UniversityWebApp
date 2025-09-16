@@ -1,0 +1,91 @@
+﻿@model AuthorizationModel
+<div class="conteiner">
+    <h1>Вход в систему</h1>
+    @if (TempData["Error"] != null)
+    {
+        <div style="color:red;font-size:19px;">@TempData["Error"]</div>
+    }
+    <form method="post" asp-controller="Authorization" asp-action="Index">
+        <label>Почта</label>
+        <input type="text" asp-for="Login" required />
+        <label>Пароль</label>
+        <input type="text" asp-for="Password" required />
+        <div>
+            <button type="submit" class="btn_add">Войти</button>
+        </div>
+        <div style="margin-top: 15px;text-align:center;">
+            <a href="/Registration/Index">Нет аккаунта?</a>
+        </div>
+    </form>
+</div>
+
+<style>
+    .container {
+        max-width: 500px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        font-family: Arial, sans-serif;
+    }
+
+        .container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .container label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .container input[type="text"],
+        .container input[type="date"],
+        .container input[type="password"] {
+            width: 100%;
+            padding: 8px 12px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+    .btn_add {
+        width: 100%;
+        padding: 10px;
+        margin-top: 25px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn_add:hover {
+            background-color: #0056b3;
+        }
+
+    .error-message {
+        color: red;
+        font-size: 16px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    a {
+        padding: 12px;
+        border-radius: 5px;
+        text-decoration: none;
+        color: black;
+    }
+    a:hover{
+        color: black;
+    }
+</style>
